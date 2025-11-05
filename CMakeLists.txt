@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.20)
 project(AlgorithmRitual)
 set(CMAKE_CXX_STANDARD 17)
-find_package(SFML 3 COMPONENTS graphics window system audio REQUIRED)
+
+# ✅ SFML 3 新语法
+find_package(SFML 3 REQUIRED)
+
 file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+
 add_executable(AlgorithmRitual ${SRC_FILES})
-target_link_libraries(AlgorithmRitual sfml-graphics sfml-window sfml-system sfml-audio pthread)
+
+# ✅ SFML 3 统一成一个目标：sfml
+target_link_libraries(AlgorithmRitual sfml)
