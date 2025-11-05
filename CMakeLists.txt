@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.20)
+project(AlgorithmRitual)
+set(CMAKE_CXX_STANDARD 17)
+find_package(SFML REQUIRED COMPONENTS graphics window system audio)
+file(GLOB SRC_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+add_executable(AlgorithmRitual ${SRC_FILES})
+target_link_libraries(AlgorithmRitual sfml-graphics sfml-window sfml-system sfml-audio pthread)
