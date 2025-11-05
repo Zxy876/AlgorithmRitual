@@ -1,0 +1,3 @@
+/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles/AlgorithmRitual.dir
+/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles/edit_cache.dir
+/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles/rebuild_cache.dir
