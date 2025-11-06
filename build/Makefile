@@ -129,6 +129,54 @@ AlgorithmRitual/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/build
 .PHONY : AlgorithmRitual/fast
 
+src/SortAlgorithm.o: src/SortAlgorithm.cpp.o
+.PHONY : src/SortAlgorithm.o
+
+# target to build an object file
+src/SortAlgorithm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o
+.PHONY : src/SortAlgorithm.cpp.o
+
+src/SortAlgorithm.i: src/SortAlgorithm.cpp.i
+.PHONY : src/SortAlgorithm.i
+
+# target to preprocess a source file
+src/SortAlgorithm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.i
+.PHONY : src/SortAlgorithm.cpp.i
+
+src/SortAlgorithm.s: src/SortAlgorithm.cpp.s
+.PHONY : src/SortAlgorithm.s
+
+# target to generate assembly for a file
+src/SortAlgorithm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.s
+.PHONY : src/SortAlgorithm.cpp.s
+
+src/Visualizer.o: src/Visualizer.cpp.o
+.PHONY : src/Visualizer.o
+
+# target to build an object file
+src/Visualizer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o
+.PHONY : src/Visualizer.cpp.o
+
+src/Visualizer.i: src/Visualizer.cpp.i
+.PHONY : src/Visualizer.i
+
+# target to preprocess a source file
+src/Visualizer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.i
+.PHONY : src/Visualizer.cpp.i
+
+src/Visualizer.s: src/Visualizer.cpp.s
+.PHONY : src/Visualizer.s
+
+# target to generate assembly for a file
+src/Visualizer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/AlgorithmRitual.dir/build.make CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.s
+.PHONY : src/Visualizer.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +210,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... AlgorithmRitual"
+	@echo "... src/SortAlgorithm.o"
+	@echo "... src/SortAlgorithm.i"
+	@echo "... src/SortAlgorithm.s"
+	@echo "... src/Visualizer.o"
+	@echo "... src/Visualizer.i"
+	@echo "... src/Visualizer.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

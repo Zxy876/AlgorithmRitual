@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/zxydediannao/AlgorithmRitual/src/SortAlgorithm.cpp" "CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o" "gcc" "CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o.d"
+  "/Users/zxydediannao/AlgorithmRitual/src/Visualizer.cpp" "CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o" "gcc" "CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o.d"
   "/Users/zxydediannao/AlgorithmRitual/src/main.cpp" "CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o" "gcc" "CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o.d"
   )
 

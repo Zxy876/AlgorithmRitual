@@ -72,10 +72,38 @@ include CMakeFiles/AlgorithmRitual.dir/flags.make
 CMakeFiles/AlgorithmRitual.dir/codegen:
 .PHONY : CMakeFiles/AlgorithmRitual.dir/codegen
 
+CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o: CMakeFiles/AlgorithmRitual.dir/flags.make
+CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o: /Users/zxydediannao/AlgorithmRitual/src/SortAlgorithm.cpp
+CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o: CMakeFiles/AlgorithmRitual.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o -MF CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o.d -o CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o -c /Users/zxydediannao/AlgorithmRitual/src/SortAlgorithm.cpp
+
+CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zxydediannao/AlgorithmRitual/src/SortAlgorithm.cpp > CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.i
+
+CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zxydediannao/AlgorithmRitual/src/SortAlgorithm.cpp -o CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.s
+
+CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o: CMakeFiles/AlgorithmRitual.dir/flags.make
+CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o: /Users/zxydediannao/AlgorithmRitual/src/Visualizer.cpp
+CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o: CMakeFiles/AlgorithmRitual.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o -MF CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o.d -o CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o -c /Users/zxydediannao/AlgorithmRitual/src/Visualizer.cpp
+
+CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/zxydediannao/AlgorithmRitual/src/Visualizer.cpp > CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.i
+
+CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/zxydediannao/AlgorithmRitual/src/Visualizer.cpp -o CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.s
+
 CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o: CMakeFiles/AlgorithmRitual.dir/flags.make
 CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o: /Users/zxydediannao/AlgorithmRitual/src/main.cpp
 CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o: CMakeFiles/AlgorithmRitual.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o -MF CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o.d -o CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o -c /Users/zxydediannao/AlgorithmRitual/src/main.cpp
 
 CMakeFiles/AlgorithmRitual.dir/src/main.cpp.i: cmake_force
@@ -88,19 +116,23 @@ CMakeFiles/AlgorithmRitual.dir/src/main.cpp.s: cmake_force
 
 # Object files for target AlgorithmRitual
 AlgorithmRitual_OBJECTS = \
+"CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o" \
+"CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o" \
 "CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o"
 
 # External object files for target AlgorithmRitual
 AlgorithmRitual_EXTERNAL_OBJECTS =
 
+AlgorithmRitual: CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o
+AlgorithmRitual: CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o
 AlgorithmRitual: CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o
 AlgorithmRitual: CMakeFiles/AlgorithmRitual.dir/build.make
-AlgorithmRitual: /opt/homebrew/lib/libsfml-graphics.2.6.2.dylib
-AlgorithmRitual: /opt/homebrew/lib/libsfml-window.2.6.2.dylib
-AlgorithmRitual: /opt/homebrew/lib/libsfml-audio.2.6.2.dylib
-AlgorithmRitual: /opt/homebrew/lib/libsfml-system.2.6.2.dylib
+AlgorithmRitual: /opt/homebrew/opt/sfml@2/lib/libsfml-graphics.2.6.2.dylib
+AlgorithmRitual: /opt/homebrew/opt/sfml@2/lib/libsfml-window.2.6.2.dylib
+AlgorithmRitual: /opt/homebrew/opt/sfml@2/lib/libsfml-audio.2.6.2.dylib
+AlgorithmRitual: /opt/homebrew/opt/sfml@2/lib/libsfml-system.2.6.2.dylib
 AlgorithmRitual: CMakeFiles/AlgorithmRitual.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable AlgorithmRitual"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/zxydediannao/AlgorithmRitual/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable AlgorithmRitual"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AlgorithmRitual.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

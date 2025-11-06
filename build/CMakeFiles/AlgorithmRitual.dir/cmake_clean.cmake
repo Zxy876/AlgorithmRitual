@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
   "AlgorithmRitual"
   "AlgorithmRitual.pdb"
+  "CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o"
+  "CMakeFiles/AlgorithmRitual.dir/src/SortAlgorithm.cpp.o.d"
+  "CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o"
+  "CMakeFiles/AlgorithmRitual.dir/src/Visualizer.cpp.o.d"
   "CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o"
   "CMakeFiles/AlgorithmRitual.dir/src/main.cpp.o.d"
 )
