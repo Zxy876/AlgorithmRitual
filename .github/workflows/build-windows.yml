@@ -1,47 +1,50 @@
 name: Build Windows Executable
 
 on:
-  workflow_dispatch:  # 手动触发构建
+  workflow_dispatch:
 
 jobs:
   build-windows:
     runs-on: windows-latest
 
     steps:
-      # 1️⃣ 拉取仓库代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ 安装依赖：CMake + SFML（从官网直接下载）
-      - name: Install dependencies (CMake + SFML)
-        shell: powershell
+      # 🧹 清理旧的 CMake 缓存防止路径冲突
+      - name: Clean previous build
         run: |
-          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=1' -y
+          if (Test-Path build) { Remove-Item build -Recurse -Force }
+
+      # 🧰 安装构建依赖（CMake + SFML）
+      - name: Install dependencies
+        run: |
+          choco install cmake -y
           Invoke-WebRequest -Uri "https://www.sfml-dev.org/files/SFML-2.6.2-windows-vc17-64-bit.zip" -OutFile "sfml.zip"
           Expand-Archive sfml.zip -DestinationPath $env:USERPROFILE\sfml
           echo "SFML_DIR=$env:USERPROFILE\sfml\SFML-2.6.2" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      # 3️⃣ 配置 CMake
+      # ⚙️ 配置 CMake 构建
       - name: Configure CMake
         run: |
-          cmake -B build -DCMAKE_BUILD_TYPE=Release -DSFML_DIR="${{ env.SFML_DIR }}\lib\cmake\SFML"
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DSFML_DIR="${{ env.SFML_DIR }}/lib/cmake/SFML"
 
-      # 4️⃣ 编译
-      - name: Build project
-        run: cmake --build build --config Release
-
-      # 5️⃣ 打包：复制资源文件 + 可执行文件
-      - name: Package executable
-        shell: powershell
+      # 🧱 编译项目
+      - name: Build Project
         run: |
-          mkdir -p build\AlgorithmRitual_Windows
-          Copy-Item build\Release\AlgorithmRitual.exe build\AlgorithmRitual_Windows\
-          Copy-Item assets build\AlgorithmRitual_Windows\assets -Recurse
+          cmake --build build --config Release -j 4
+
+      # 📦 打包 Windows 可执行文件
+      - name: Package Executable
+        run: |
           cd build
+          mkdir -p AlgorithmRitual_Windows/assets
+          copy ..\assets\* AlgorithmRitual_Windows\assets\
+          copy .\Release\AlgorithmRitual.exe AlgorithmRitual_Windows\
           Compress-Archive -Path AlgorithmRitual_Windows -DestinationPath AlgorithmRitual_Windows.zip
 
-      # 6️⃣ 上传 Artifact（供你或他人下载）
-      - name: Upload artifact
+      # ☁️ 上传构建结果
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: AlgorithmRitual_Windows
