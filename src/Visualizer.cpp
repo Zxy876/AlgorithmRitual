@@ -2,6 +2,8 @@
 #include <cmath>
 #include <iostream>
 #include <random>
+#include <filesystem>
+#include <mach-o/dyld.h> // ✅ macOS: 获取可执行路径
 
 namespace {
     float globalTime = 0.0f;
@@ -12,6 +14,31 @@ namespace {
 
 void Visualizer::setPulse(float p) {
     pulse = p;
+}
+
+// ✅ 自动定位字体路径（兼容 .app / build / 源码目录）
+std::filesystem::path getFontPath() {
+    std::vector<std::filesystem::path> possiblePaths = {
+        "assets/SourceHanSerifSC-Regular.otf",
+        "../assets/SourceHanSerifSC-Regular.otf",
+        "../../assets/SourceHanSerifSC-Regular.otf"
+    };
+
+    for (const auto& p : possiblePaths)
+        if (std::filesystem::exists(p))
+            return p;
+
+    // macOS .app 情况
+    char buf[1024];
+    uint32_t size = sizeof(buf);
+    if (_NSGetExecutablePath(buf, &size) == 0) {
+        std::filesystem::path exePath(buf);
+        auto appFont = exePath.parent_path() / "assets" / "SourceHanSerifSC-Regular.otf";
+        if (std::filesystem::exists(appFont))
+            return appFont;
+    }
+
+    return {};
 }
 
 // 初始化粒子
@@ -36,7 +63,7 @@ void Visualizer::drawArray(sf::RenderWindow& window, const std::vector<int>& arr
     float width = static_cast<float>(window.getSize().x) / arr.size();
     float baseY = window.getSize().y;
 
-    // 🌈 背景呼吸渐变：深紫 → 金色
+    // 🌈 背景呼吸渐变
     sf::RectangleShape bg(sf::Vector2f(window.getSize().x, window.getSize().y));
     float t = (std::sin(globalTime * 0.4f) + 1.0f) / 2.0f;
     sf::Color c1(25, 5, 45);
@@ -96,15 +123,16 @@ void Visualizer::drawArray(sf::RenderWindow& window, const std::vector<int>& arr
     }
     window.draw(wave);
 
-    // --- 🎴 算法名呼吸闪烁 ---
+    // --- 🎴 算法名与标题 ---
     static sf::Font font;
     static bool fontLoaded = false;
     if (!fontLoaded) {
-        if (font.loadFromFile("../assets/SourceHanSerifSC-Regular.otf") ||
-            font.loadFromFile("assets/SourceHanSerifSC-Regular.otf")) {
+        auto fontPath = getFontPath();
+        if (!fontPath.empty() && font.loadFromFile(fontPath.string())) {
             fontLoaded = true;
+            std::cout << "🈶 成功加载字体：" << fontPath << std::endl;
         } else {
-            std::cerr << "⚠️ 字体文件未找到！" << std::endl;
+            std::cerr << "⚠️ 未找到字体文件 SourceHanSerifSC-Regular.otf" << std::endl;
         }
     }
 

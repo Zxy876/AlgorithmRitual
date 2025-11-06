@@ -11,13 +11,14 @@
 #include <iostream>
 #include <cmath>
 #include <system_error>
+#include <mach-o/dyld.h> // ✅ macOS 特有，用于获取当前可执行路径
 
 #include "SortAlgorithm.h"
 #include "Visualizer.h"
 
 using namespace std::chrono_literals;
 
-// ✅ 安全检测文件变化（不会崩溃）
+// ✅ 检测文件是否被修改
 bool checkFileModified(const std::filesystem::path& path, std::filesystem::file_time_type& lastWriteTime) {
     std::error_code ec;
     if (!std::filesystem::exists(path, ec) || ec) return false;
@@ -40,7 +41,7 @@ std::vector<int> generateRandomArray(size_t size) {
     return arr;
 }
 
-// ✅ 统一封装排序线程启动
+// ✅ 启动排序线程
 void restartSortThread(std::unique_ptr<std::thread>& sortThread,
                        SortAlgorithm& sorter,
                        std::vector<int>& arr,
@@ -59,8 +60,32 @@ void restartSortThread(std::unique_ptr<std::thread>& sortThread,
     });
 }
 
+// ✅ 获取正确的资源路径（兼容 .app / 开发目录）
+std::filesystem::path getAppResourcePath() {
+    char path[1024];
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0) {
+        std::filesystem::path exePath(path);
+        auto appAssets = exePath.parent_path() / "assets";
+        if (std::filesystem::exists(appAssets))
+            return appAssets;
+    }
+    return std::filesystem::path("assets");
+}
+
 int main() {
     try {
+        // ✅ 修复 Finder 启动路径（让 .app 能正常加载资源）
+        char path[1024];
+        uint32_t size = sizeof(path);
+        if (_NSGetExecutablePath(path, &size) == 0) {
+            std::filesystem::path exePath(path);
+            auto macPath = exePath.parent_path();
+            std::filesystem::current_path(macPath);
+            std::cout << "📁 已切换工作目录到: " << macPath << std::endl;
+        }
+
+        // 🎬 窗口初始化
         sf::RenderWindow window(sf::VideoMode(800, 600), "Algorithm as Ritual");
         window.setFramerateLimit(60);
 
@@ -71,17 +96,31 @@ int main() {
 
         // 🎵 加载音乐
         sf::Music music;
-        std::string musicPath = "../assets/chaoduwo_climax.ogg";
-        if (!std::filesystem::exists(musicPath))
-            musicPath = "assets/chaoduwo_climax.ogg";
+        std::filesystem::path basePath = getAppResourcePath();
+        std::string musicPath;
 
-        if (music.openFromFile(musicPath)) {
+        std::vector<std::filesystem::path> possiblePaths = {
+            basePath / "chaoduwo_climax.ogg",
+            std::filesystem::path("assets/chaoduwo_climax.ogg"),
+            std::filesystem::path("../assets/chaoduwo_climax.ogg")
+        };
+
+        for (const auto& p : possiblePaths) {
+            if (std::filesystem::exists(p)) {
+                musicPath = p.string();
+                break;
+            }
+        }
+
+        if (musicPath.empty()) {
+            std::cerr << "⚠️ 未找到音乐文件 chaoduwo_climax.ogg\n";
+        } else if (music.openFromFile(musicPath)) {
             music.setLoop(true);
             music.setVolume(75);
             music.play();
-            std::cout << "🎧 正在播放《超度我》高潮段...\n";
+            std::cout << "🎧 成功播放《超度我》: " << musicPath << "\n";
         } else {
-            std::cerr << "⚠️ 未找到音乐文件: " << musicPath << "\n";
+            std::cerr << "⚠️ 无法打开音乐文件: " << musicPath << "\n";
         }
 
         // 🧮 初始化数据
@@ -91,7 +130,7 @@ int main() {
         bool recompileRequested = false;
         int currentAlgorithm = 0;
 
-        // 🔍 检测 SortAlgorithm.cpp 文件是否被修改
+        // 🔍 检测 SortAlgorithm.cpp 是否被修改
         std::filesystem::path filePath = "src/SortAlgorithm.cpp";
         if (!std::filesystem::exists(filePath))
             filePath = "../src/SortAlgorithm.cpp";
@@ -122,7 +161,7 @@ int main() {
                     if (event.key.code == sf::Keyboard::R)
                         recompileRequested = true;
 
-                    // 🔁 切换算法（带冷却防卡死）
+                    // 🔁 切换算法（带防卡冷却）
                     if (event.key.code == sf::Keyboard::Q) {
                         static auto lastSwitch = std::chrono::steady_clock::now();
                         auto now = std::chrono::steady_clock::now();
@@ -136,7 +175,7 @@ int main() {
                 }
             }
 
-            // 🔄 检测文件改动或手动触发重编译
+            // 🔄 检测改动或手动触发重新编译
             auto now = std::chrono::steady_clock::now();
             if (now - lastFileCheck > 500ms) {
                 lastFileCheck = now;
@@ -176,7 +215,7 @@ int main() {
                 }
             }
 
-            // 🎶 音乐同步脉冲
+            // 🎶 音乐脉冲同步
             float pulse = 1.0f;
             if (music.getStatus() == sf::Music::Playing) {
                 float t = music.getPlayingOffset().asSeconds();
@@ -184,7 +223,7 @@ int main() {
             }
             Visualizer::setPulse(pulse);
 
-            // 🧭 算法名称 & 窗口标题
+            // 🧭 算法标题
             static const char* algoNames[4] = {"Bubble Sort", "Quick Sort", "Merge Sort", "Heap Sort"};
             std::string algoName =
                 (currentAlgorithm >= 0 && currentAlgorithm < 4)
@@ -206,7 +245,7 @@ int main() {
                 if (sorter.ready) sorter.ready = false;
             }
 
-            // 🎨 绘制画面
+            // 🎨 绘制界面
             window.clear(sf::Color::Black);
             Visualizer::drawArray(window, arr, algoName);
             window.display();
@@ -214,7 +253,7 @@ int main() {
             sorter.cv.notify_one();
         }
 
-        // ✅ 收尾清理
+        // ✅ 清理
         running = false;
         sorter.cv.notify_all();
         if (sortThread && sortThread->joinable()) sortThread->join();
